@@ -9,7 +9,7 @@ def getFileHash(filePath):
         print u'文件小于8k, 不是视频文件吧？'
         return
 
-    offsets = (4096, math.floor(fileSize / 3) * 2, math.floor(fileSize /3), fileSize - 8192)
+    offsets = (4096, math.floor(fileSize / 3) * 2, math.floor(fileSize / 3), fileSize - 8192)
     bufferSize = 4096
     fd = open(filePath, 'rb')
     md5Arr = []
