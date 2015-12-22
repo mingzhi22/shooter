@@ -31,7 +31,10 @@ data = urllib.urlencode({
 
 u = urllib.urlopen('http://www.shooter.cn/api/subapi.php', data)
 
-subtitles = parseSubtitles(json.loads(u.read()))
+try:
+    subtitles = parseSubtitles(json.loads(u.read()))
+except Exception as e:
+    subtitles = ''
 
 if subtitles and len(subtitles):
     extCount = {}
@@ -52,3 +55,5 @@ if subtitles and len(subtitles):
             urllib.urlretrieve(subtitle['url'], subtitlePath)
         else:
             print u'字幕存在: ' + subtitlePath
+else:
+    print u'暂无字幕: ' + filePath
