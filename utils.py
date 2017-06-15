@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import os, math, md5, urllib
+import sys, os, math, md5, urllib
 
 def getFileHash(filePath):
     filePath = os.path.expanduser(filePath)
@@ -15,7 +15,17 @@ def getFileHash(filePath):
     md5Arr = []
 
     for offset in offsets:
-        fd.seek(offset)
+        if offset >= sys.maxsize:
+            fd.seek(0)
+
+            while offset >= sys.maxsize:
+                fd.seek(sys.maxsize, os.SEEK_CUR)
+                offset = offset - sys.maxsize
+
+            fd.seek(offset, os.SEEK_CUR)
+        else:
+            fd.seek(offset)
+
         buffer = fd.read(bufferSize)
 
         if len(buffer) < bufferSize:
