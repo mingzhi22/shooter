@@ -49,7 +49,7 @@ if subtitles and len(subtitles):
 
         pathInfo = os.path.splitext(filePath)
 
-        subtitlePath = (pathInfo[0] + '.chn' + (str(extCount[ext]) if extCount[ext] else '') + '.' + ext).encode('utf-8')
+        subtitlePath = (pathInfo[0] + ('.' + str(extCount[ext]) if extCount[ext] else '') + '.chi.' + ext).encode('utf-8')
         if not os.path.isfile(subtitlePath):
             print u'下载字幕: ' + subtitlePath
             urllib.urlretrieve(subtitle['url'], subtitlePath)
